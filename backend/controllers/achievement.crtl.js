@@ -1,9 +1,9 @@
-const Student= require('../models/student')
+const Achievement= require('../models/Achievement')
 
 module.exports = {
 
-        async getStudents  (req, res,next) {
-        await  Student.find()
+        async getAchievements  (req, res,next) {
+        await  Achievement.find()
             .then(response=>{
                 res.json(response)
             })
@@ -13,9 +13,9 @@ module.exports = {
 
 
 
-        async getStudentById (req, res,next) {
-            let studentId= req.body.id
-            await Student.findById(studentId)
+        async getAchievementById (req, res,next) {
+            let achievementId= req.body.id
+            await Achievement.findById(achievementId)
             .then(response=>{
                 res.json(response)
             })
@@ -27,13 +27,13 @@ module.exports = {
         },
 
 
-        async createStudent (req, res,next){
-            let student= new Student({
+        async createAchievement (req, res,next){
+            let achievement= new Achievement({
                 nom:req.body.nom,
                 prenom:req.body.prenom,
                 CNI:req.body.CNI
             })
-            await student.save()
+            await achievement.save()
             .then(response=>{
                 res.json({
                     message:"Creation reussi"
@@ -46,14 +46,14 @@ module.exports = {
             })
         },
 
-        async updateStudent (req, res,next){
-            let studentId= req.body.id
+        async updateAchievement (req, res,next){
+            let achievementId= req.body.id
             let updatedData= {
                 nom:req.body.nom,
                 prenom:req.body.prenom,
                 CNI:req.body.CNI
             }
-            await  Student.findByIdAndUpdate(studentId,{ $set: updatedData})
+            await  Achievement.findByIdAndUpdate(achievementId,{ $set: updatedData})
             .then(response=>{
                 res.json({
                     message:"Mis a jour  reussi"
@@ -67,9 +67,9 @@ module.exports = {
         },
 
 
-        async deleteStudent (req, res,next) {
-            let studentId= req.body.id
-            await Student.findOneAndRemove(studentId)
+        async deleteAchievement (req, res,next) {
+            let achievementId= req.body.id
+            await Achievement.findOneAndRemove(achievementId)
             .then(response=>{
                 res.json({
                     message:"Suppression reussi"

@@ -1,5 +1,6 @@
 const mongoose= require('mongoose');
-const student= new mongoose.Schema({
+
+const studentSchema = new mongoose.Schema({
     nom:String,
     prenom:String ,
     CNI:Number,
@@ -8,4 +9,8 @@ const student= new mongoose.Schema({
 },
 {timestamps:true})
 
-module.exports = mongoose.model('Student',student )    
+const Student = mongoose.model('Student', studentSchema);
+
+// Student.createCollection();
+
+module.exports = Student

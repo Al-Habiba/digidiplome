@@ -1,86 +1,78 @@
-const Student= require('../models/student')
+const Student = require('../models/student')
 
 module.exports = {
 
-        async getStudents  (req, res,next) {
-        await  Student.find()
-            .then(response=>{
-                res.json(response)
+    async getStudents(req, res) {
+        await Student.find()
+            .then(students => {
+                res.status(200).json(students)
             })
-            .catch(error =>{
-                res.json("erreur")    })
-        },
-
-
-
-        async getStudentById (req, res,next) {
-            let studentId= req.body.id
-            await Student.findById(studentId)
-            .then(response=>{
-                res.json(response)
+            .catch(error => {
+                res.status(400).json("Error, " + error.message)
             })
-            .catch(error =>{
-                res.json({ 
-                    message:'erreur'
-                    })
-            })
-        },
+    },
 
 
-        async createStudent (req, res,next){
-            let student= new Student({
-                nom:req.body.nom,
-                prenom:req.body.prenom,
-                CNI:req.body.CNI
+    async getStudentById(req, res) {
+        let studentId = req.body.id
+        await Student.findById(studentId)
+            .then(student => {
+                res.json(student)
             })
-            await student.save()
-            .then(response=>{
+            .catch(error => {
                 res.json({
-                    message:"Creation reussi"
+                    message: 'Student not found'
                 })
             })
-            .catch(error =>{
-                res.json({ 
-                    message:'erreur'
-                    })
-            })
-        },
+    },
 
-        async updateStudent (req, res,next){
-            let studentId= req.body.id
-            let updatedData= {
-                nom:req.body.nom,
-                prenom:req.body.prenom,
-                CNI:req.body.CNI
-            }
-            await  Student.findByIdAndUpdate(studentId,{ $set: updatedData})
-            .then(response=>{
-                res.json({
-                    message:"Mis a jour  reussi"
+
+    async createStudent(req, res) {
+        let student = new Student(req.body)
+        await student.save()
+            .then(savedStudent => {
+                res.status(200).json(savedStudent,{
+                    message: "Student saved successfully"
                 })
             })
-            .catch(error =>{
-                res.json({ 
-                    message:'erreur'
-                    })
-            })
-        },
-
-
-        async deleteStudent (req, res,next) {
-            let studentId= req.body.id
-            await Student.findOneAndRemove(studentId)
-            .then(response=>{
-                res.json({
-                    message:"Suppression reussi"
+            .catch(error => {
+                res.status(404).json({
+                    message: 'Error saving student: ' + error.message
                 })
             })
-            .catch(error =>{
-                res.json({ 
-                    message:'erreur'
-                    })
+    },
+
+    async updateStudent(req, res) {
+        let studentId = req.params
+        let updatedData = req.body
+        await Student.findByIdAndUpdate(studentId, { $set: updatedData })
+            .then(updatedStudent => {
+                res.json(updatedStudent,{
+                    message: "Student updated successfully"
+                })
             })
-        }
+            .catch(error => {
+                res.json({
+                    message: 'Error updating student'
+                })
+            })
+    },
+
+
+    async deleteStudent(req, res) {
+        let studentId = req.params
+        await Student.findByIdAndRemove(studentId)
+            .then(deletedStudent => {
+                res.json(deletedStudent,{
+                    message: "Student deleted successfully"
+                })
+            })
+            .catch(error => {
+                res.json({
+                    message: 'Error deleting student'
+                })
+            })
+    }
 
 
 }

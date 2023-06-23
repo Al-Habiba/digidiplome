@@ -1,17 +1,18 @@
 const mongoose= require('mongoose');
 const achievement= new mongoose.Schema({
-    type:String,
-    titre:{
+    title:{
         String,
         enum:['diplome','certificat']
     } ,
-    CNI:Number,
-    domaine:String,
-    annee:String,
-    signatureNum:String,
-    mention :String,
-    donneeDeValidation:String,
-    statutDaccreditation:String,
+    type:String,
+    dateOfCompletion : Date,
+    domain : String,
+    annee : String,
+    digitalSignature : String,
+    mention : String,
+    validationData : String,
+    accreditationStatus : String,
+    issuingInstitution: String,
 
 },
 {timestamps:true})

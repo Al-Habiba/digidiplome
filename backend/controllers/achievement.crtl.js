@@ -1,83 +1,72 @@
-const Achievement= require('../models/Achievement')
+const Achievement= require('../models/achievement')
 
 module.exports = {
 
         async getAchievements  (req, res,next) {
         await  Achievement.find()
-            .then(response=>{
-                res.json(response)
+            .then(achievement=>{
+                res.status(200).json(achievement)
             })
             .catch(error =>{
-                res.json("erreur")    })
+                res.status(400).json("Error, " + error.message)    })
         },
 
 
-
-        async getAchievementById (req, res,next) {
+        async getAchievementById (req, res) {
             let achievementId= req.body.id
             await Achievement.findById(achievementId)
-            .then(response=>{
-                res.json(response)
+            .then(achievement=>{
+                res.json(achievement)
             })
             .catch(error =>{
                 res.json({ 
-                    message:'erreur'
+                    message:'Achievement not found'
                     })
             })
         },
 
 
-        async createAchievement (req, res,next){
-            let achievement= new Achievement({
-                nom:req.body.nom,
-                prenom:req.body.prenom,
-                CNI:req.body.CNI
-            })
+        async createAchievement (req, res){
+            let achievement= new Achievement(req.body)
             await achievement.save()
-            .then(response=>{
-                res.json({
-                    message:"Creation reussi"
-                })
+            .then(achievement=>{
+                res.status(200).json()
             })
             .catch(error =>{
-                res.json({ 
-                    message:'erreur'
+                res.status(404).json({ 
+                    message:'Error saving achievement: ' + error.message
                     })
             })
         },
 
         async updateAchievement (req, res,next){
             let achievementId= req.body.id
-            let updatedData= {
-                nom:req.body.nom,
-                prenom:req.body.prenom,
-                CNI:req.body.CNI
-            }
+            let updatedData = req.body
             await  Achievement.findByIdAndUpdate(achievementId,{ $set: updatedData})
-            .then(response=>{
+            .then(achievement=>{
                 res.json({
-                    message:"Mis a jour  reussi"
+                    message:"Achievement updated successfully"
                 })
             })
             .catch(error =>{
                 res.json({ 
-                    message:'erreur'
+                    message:'Error updating achievement'
                     })
             })
         },
 
 
-        async deleteAchievement (req, res,next) {
-            let achievementId= req.body.id
+        async deleteAchievement (req, res) {
+            let achievementId= req.params
             await Achievement.findOneAndRemove(achievementId)
-            .then(response=>{
+            .then(achievement=>{
                 res.json({
-                    message:"Suppression reussi"
+                    message:"Achievement deleted successfully"
                 })
             })
             .catch(error =>{
                 res.json({ 
-                    message:'erreur'
+                    message:'Error deleting achievement'
                     })
             })
         }

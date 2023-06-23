@@ -4,8 +4,8 @@ module.exports = {
 
     async getStudents(req, res) {
         await Student.find()
-            .then(students => {
-                res.status(200).json(students)
+            .then(student => {
+                res.status(200).json(student)
             })
             .catch(error => {
                 res.status(400).json("Error, " + error.message)
@@ -31,9 +31,7 @@ module.exports = {
         let student = new Student(req.body)
         await student.save()
             .then(savedStudent => {
-                res.status(200).json(savedStudent,{
-                    message: "Student saved successfully"
-                })
+                res.status(200).json()
             })
             .catch(error => {
                 res.status(404).json({

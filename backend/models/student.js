@@ -5,6 +5,14 @@ const studentSchema = new mongoose.Schema({
     prenom:String ,
     CNI:Number,
     email:String,
+    birthdate:Date,
+    tel:Number,
+    educationLevel:String,
+    status:String,
+    login:String,
+    password:String,
+    gender:String,
+
 
 },
 {timestamps:true})

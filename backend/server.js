@@ -8,8 +8,8 @@ const bodyParser = require('body-parser');
 // create an express application
 const app = express();
 
+// Set up the middleware to parse incoming requests as JSON
 app.use(bodyParser.json());
-
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // connection to db
@@ -21,7 +21,7 @@ mongoose.connect(dbConfig.url, dbConfig.options)
     console.error('Failed to connect to MongoDB', error);
   });
 
-// Set up the middleware to parse incoming requests as JSON
+
 
 // define the port number for the server
 const port = 3000;

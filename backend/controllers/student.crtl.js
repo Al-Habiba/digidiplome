@@ -1,4 +1,3 @@
-const { response } = require('express')
 const Student = require('../models/student')
 
 module.exports = {
@@ -17,8 +16,8 @@ module.exports = {
     async getStudentById(req, res) {
         let studentId = req.params.id
         await Student.findById(studentId)
-            .then(response => {
-                res.json(response)
+            .then(student => {
+                res.json(student)
             })
             .catch(error => {
                 res.json(error, {
@@ -32,7 +31,7 @@ module.exports = {
         let student = new Student(req.body)
         await student.save()
             .then(savedStudent => {
-                res.status(200).json(saveStudent(savedStudent))
+                res.status(200).json(savedStudent)
             })
             .catch(error => {
                 res.status(404).json({

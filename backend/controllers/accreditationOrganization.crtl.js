@@ -14,13 +14,13 @@ module.exports = {
 
 
     async getAccreditationOrganizationById(req, res) {
-        let accreditationOrganizationId = req.body.id
+        let accreditationOrganizationId = req.params.id
         await AccreditationOrganization.findById(accreditationOrganizationId)
             .then(accreditationOrganization => {
                 res.json(accreditationOrganization)
             })
             .catch(error => {
-                res.json({
+                res.json(error, {
                     message: 'AccreditationOrganization not found'
                 })
             })
@@ -31,7 +31,7 @@ module.exports = {
         let accreditationOrganization = new AccreditationOrganization(req.body)
         await accreditationOrganization.save()
             .then(savedAccreditationOrganization => {
-                res.status(200).json()
+                res.status(200).json(savedAccreditationOrganization)
             })
             .catch(error => {
                 res.status(404).json({
@@ -41,16 +41,16 @@ module.exports = {
     },
 
     async updateAccreditationOrganization(req, res) {
-        let accreditationOrganizationId = req.params
+        let accreditationOrganizationId = req.params.id
         let updatedData = req.body
         await AccreditationOrganization.findByIdAndUpdate(accreditationOrganizationId, { $set: updatedData })
             .then(updatedAccreditationOrganization => {
-                res.json(updatedAccreditationOrganization,{
+                res.json(updatedAccreditationOrganization, {
                     message: "AccreditationOrganization updated successfully"
                 })
             })
             .catch(error => {
-                res.json({
+                res.json(error, {
                     message: 'Error updating accreditationOrganization'
                 })
             })
@@ -58,15 +58,15 @@ module.exports = {
 
 
     async deleteAccreditationOrganization(req, res) {
-        let accreditationOrganizationId = req.params
+        let accreditationOrganizationId = req.params.id
         await AccreditationOrganization.findByIdAndRemove(accreditationOrganizationId)
             .then(deletedAccreditationOrganization => {
-                res.json(deletedAccreditationOrganization,{
+                res.json(deletedAccreditationOrganization, {
                     message: "AccreditationOrganization deleted successfully"
                 })
             })
             .catch(error => {
-                res.json({
+                res.json(error, {
                     message: 'Error deleting accreditationOrganization'
                 })
             })

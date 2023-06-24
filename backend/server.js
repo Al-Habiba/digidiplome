@@ -21,15 +21,12 @@ mongoose.connect(dbConfig.url, dbConfig.options)
     console.error('Failed to connect to MongoDB', error);
   });
 
-
-
 // define the port number for the server
 const port = 3000;
 
 // add routes
-require('./routes/student.route')(app);
-
-// app.use('/api/student',studentRoute);
+// require('./routes/student.route')(app);
+app.use('/api/student',studentRoute);
 
 // start the server
 app.listen(port, () => {

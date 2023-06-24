@@ -1,3 +1,4 @@
+const { response } = require('express')
 const Student = require('../models/student')
 
 module.exports = {
@@ -14,13 +15,13 @@ module.exports = {
 
 
     async getStudentById(req, res) {
-        let studentId = req.body.id
+        let studentId = req.params.id
         await Student.findById(studentId)
-            .then(student => {
-                res.json(student)
+            .then(response => {
+                res.json(response)
             })
             .catch(error => {
-                res.json({
+                res.json(error, {
                     message: 'Student not found'
                 })
             })
@@ -31,7 +32,7 @@ module.exports = {
         let student = new Student(req.body)
         await student.save()
             .then(savedStudent => {
-                res.status(200).json()
+                res.status(200).json(saveStudent(savedStudent))
             })
             .catch(error => {
                 res.status(404).json({
@@ -41,7 +42,7 @@ module.exports = {
     },
 
     async updateStudent(req, res) {
-        let studentId = req.params
+        let studentId = req.params.id
         let updatedData = req.body
         await Student.findByIdAndUpdate(studentId, { $set: updatedData })
             .then(updatedStudent => {
@@ -50,7 +51,7 @@ module.exports = {
                 })
             })
             .catch(error => {
-                res.json({
+                res.json(error, {
                     message: 'Error updating student'
                 })
             })
@@ -58,7 +59,7 @@ module.exports = {
 
 
     async deleteStudent(req, res) {
-        let studentId = req.params
+        let studentId = req.params.id
         await Student.findByIdAndRemove(studentId)
             .then(deletedStudent => {
                 res.json(deletedStudent,{
@@ -66,7 +67,7 @@ module.exports = {
                 })
             })
             .catch(error => {
-                res.json({
+                res.json(error, {
                     message: 'Error deleting student'
                 })
             })

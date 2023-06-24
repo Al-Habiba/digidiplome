@@ -1,11 +1,11 @@
+const express = require('express')
+const route = express.Router()
 const student = require('../controllers/student.crtl')
 
-module.exports = (app) => {
+    route.post('/', student.createStudent)
+    route.get('/', student.getStudents)
+    route.get('/:id', student.getStudentById)
+    route.put('/:id', student.updateStudent)
+    route.delete('/:id', student.deleteStudent)
 
-    app.post('/student', student.createStudent)
-    app.get('/student', student.getStudents)
-    app.get('/:id', student.getStudentById)
-    app.put('/:id', student.updateStudent)
-    app.delete('/:id', student.deleteStudent)
-
-}
+module.exports = route

@@ -13,7 +13,6 @@ const studentSchema = new mongoose.Schema({
     password:String,
     gender:String,
 
-
 },
 {timestamps:true})
 

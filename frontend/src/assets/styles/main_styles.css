@@ -39,6 +39,7 @@
 *********************************/
 
 *
+
 {
 	margin: 0;
 	padding: 0;
@@ -148,7 +149,7 @@ h6::selection
 }
 .form-control
 {
-	color: #db5246;
+	color: #db46a7;
 }
 section
 {
@@ -156,6 +157,20 @@ section
 	position: relative;
 	box-sizing: border-box;
 }
+.testimonial-card .card-up {
+	height: 120px;
+	overflow: hidden;
+	border-top-left-radius: 0.25rem;
+	border-top-right-radius: 0.25rem;
+  }
+  .testimonial-card .avatar {
+	width: 110px;
+	margin-top: -60px;
+	overflow: hidden;
+	border: 3px solid #fff;
+	border-radius: 50%;
+  }
+
 .clear
 {
 	clear: both;

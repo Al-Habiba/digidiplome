@@ -2,12 +2,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const studentRoute = require('./routes/student.route');
+const achievementRoute=require('./routes/achievement.route')
 const dbConfig = require('./config/db.conf');
 const bodyParser = require('body-parser');
+const cors= require('cors')
 
 // create an express application
 const app = express();
+const corsOptions = {
+  origin: 'http://localhost:4200'
+}
 
+app.use(cors(corsOptions));
 // Set up the middleware to parse incoming requests as JSON
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,6 +33,7 @@ const port = 3000;
 // add routes
 // require('./routes/student.route')(app);
 app.use('/api/student',studentRoute);
+app.use('/api/achievement',achievementRoute)
 
 // start the server
 app.listen(port, () => {

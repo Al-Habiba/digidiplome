@@ -13,6 +13,7 @@ const achievement= new mongoose.Schema({
     validationData : String,
     accreditationStatus : String,
     issuingInstitution: String,
+    filePath:String,
 
 },
 {timestamps:true})

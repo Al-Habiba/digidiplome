@@ -1,11 +1,14 @@
 const achievement = require('../controllers/achievement.crtl')
+const express = require('express')
+const route = express.Router()
 
-module.exports = (app) => {
+    route.post('/', achievement.createAchievement)
+    route.get('/', achievement.getAchievements)
+    route.get('/:id', achievement.getAchievementById)
+    route.put('/:id', achievement.updateAchievement)
+    route.delete('/:id', achievement.deleteAchievement)
+    route.post('/hashContract',achievement.uploadPDF)
+    route.post('/compareHash',achievement.compareHash)
+    
 
-    app.post('/achievement', achievement.createAchievement)
-    app.get('/achievement', achievement.getAchievements)
-    app.get('/:id', achievement.getAchievementById)
-    app.put('/:id', achievement.updateAchievement)
-    app.delete('/:id', achievement.deleteAchievement)
-
-}
+module.exports = route

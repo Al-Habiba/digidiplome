@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "digidiplome",
   "version": "1.0.0",
   "description": "",
@@ -17,5 +18,10 @@
   "dependencies": {
     "@nomicfoundation/hardhat-ethers": "^3.0.4",
     "ethers": "^6.7.0"
+=======
+  "devDependencies": {
+    "dotenv": "^16.3.1",
+    "hardhat": "^2.17.1"
+>>>>>>> dde1f200bc30bcf757b59e90b4ac7b4951866014
   }
 }

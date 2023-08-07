@@ -13,7 +13,7 @@ const contract = new ethers.Contract(
   artefact.abi,
   provider
 );
-
+console.log("provider",provider)
 const soumettreUnDiplome = async (nomEtablissment, hashDuDiplome) => {
   await contract.enregistrerDiplome(nomEtablissment, hashDuDiplome);
 };

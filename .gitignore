@@ -1,4 +1,5 @@
 node_modules
+<<<<<<< HEAD
 .env
 coverage
 coverage.json
@@ -9,3 +10,6 @@ typechain-types
 cache
 artifacts
 
+=======
+.env
+>>>>>>> dde1f200bc30bcf757b59e90b4ac7b4951866014

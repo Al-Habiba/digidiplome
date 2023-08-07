@@ -22,6 +22,7 @@ import { StudentPageComponent } from './components/student-page/student-page.com
     HeaderComponent,
     FooterComponent,
     AboutComponent,
+    UploadAchievementComponent,
     StudentPageComponent,
   ],
   imports: [

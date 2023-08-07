@@ -11,6 +11,7 @@ import { HomeComponent } from './views/shared/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AboutComponent } from './views/shared/about/about.component';
+import { UploadAchievementComponent } from './upload-achievement/upload-achievement.component';
 import { StudentPageComponent } from './components/student-page/student-page.component';
 
 
@@ -22,6 +23,7 @@ import { StudentPageComponent } from './components/student-page/student-page.com
     HeaderComponent,
     FooterComponent,
     AboutComponent,
+    UploadAchievementComponent,
     StudentPageComponent,
   ],
   imports: [

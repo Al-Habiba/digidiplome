@@ -2,7 +2,8 @@ const Achievement = require('../models/achievement')
 const crypto = require('crypto');
 const { uploadFileMiddleware,uploadPDFToFS} = require('./upload.ctrl');
 const fs = require('fs');
-
+const {soumettreUnDiplome,verifierUnDiplome} = require("./blockchain.ctrl");
+  
 
 let pdfFilename
 module.exports = {
@@ -18,12 +19,13 @@ module.exports = {
               const pdfFilePath = fs.readFileSync(req.file.path);
               const hash = crypto.createHash('sha256').update(pdfFilePath).digest('hex');
               console.log("hash "+hash )
-             /* fs.unlink(req.file.path,(err)=>{
-                console.log(err)
-              })*/
+              // Check if the diploma exists on the blockchain
+              const achievementExists = await verifierUnDiplome(hash);
+              console.log("The achievement ", achievementExists ? "existe " : " n'existe pas ","in the blockchain");
               res.status(200).send({
                 message: "Uploaded the file successfully: " + req.file.originalname,
-                hash:hash
+                hash:hash,
+                achievementExists:achievementExists
               });
               pdfFilename=req.file.originalname
         }
@@ -46,6 +48,10 @@ module.exports = {
         if (achievement) {
             console.log("Hash exists in the database");
             const pdfFilePath='../uploads/'+pdfFilename
+
+            //upload the achievement in the blockchain 
+            const issuingInstitution= achievement.issuingInstitution
+            await soumettreUnDiplome(issuingInstitution, digitalSignature);
 
             //storing the pdf in fire store
             const downloadUrl = await uploadPDFToFS(pdfFilePath, pdfFilename+Date.now());

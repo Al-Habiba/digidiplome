@@ -1,0 +1,5 @@
+<form [formGroup]="uploadForm">
+    <input type="file" (change)="onFileSelected($event)" formControlName="file">
+    <button type="submit" (click)="uploadFile()">Envoyer</button>
+  </form>
+  

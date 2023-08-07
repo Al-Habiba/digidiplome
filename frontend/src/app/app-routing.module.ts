@@ -4,7 +4,7 @@ import { HomeComponent } from './views/shared/home/home.component';
 import { AboutComponent } from './views/shared/about/about.component';
 
 const routes: Routes = [
-  {path: 'home', component:HomeComponent},
+  {path: '', component:HomeComponent},
   {path: 'about', component:AboutComponent},
 
   // {path:'', redirectTo:'home',pathMatch: 'full'}
